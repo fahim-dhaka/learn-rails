@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  image_url: MyString
+  price: 9.99
+
+two:
+  title: MyString
+  description: MyText
+  image_url: MyString
+  price: 9.99
+
+#START:autoparts
+autoparts: 
+  title: Toyota Headlight      
+  description: Buy a Toyota Headlight from us!     
+  price: 3500.00
+  image_url: ToyotaHeadlight.jpg   
+#END:autoparts
