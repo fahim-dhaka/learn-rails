@@ -24,8 +24,8 @@
       margin: 0;
     }
 
-    dt {
-      color: LightYellow;
+    dt {                             //for product title
+      color: lightyellow;
       font-weight: bold;
       font-size: larger;
     }
@@ -46,6 +46,6 @@
   }
 
   .list_line_odd {
-	background: #666699;
+	background: skyblue;
   }
 }

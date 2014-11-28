@@ -1,6 +1,6 @@
 body {
-  background-color: #fff;
-  color: #333;
+  background-color: #fff;                                     // localhost:3000/prodects    background page color                 
+  color: #333;                                                // localhost:3000/prodects    product details color
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -19,12 +19,12 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #000;                                // When show, edit, distroy not clicked ever
   &:visited {
-    color: #666;
+    color: Red;                               // When show, edit, distroy clicked before
   }
   &:hover {
-    color: #fff;
+    color: #fff;                              
     background-color: #000;
   }
 }
@@ -36,7 +36,7 @@ div {
 }
 
 #notice {
-  color: green;
+  color: Green;
 }
 
 .field_with_errors {
