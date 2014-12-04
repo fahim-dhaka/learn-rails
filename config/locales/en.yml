@@ -21,3 +21,13 @@
 
 en:
   hello: "Hello world"
+  #END:layout
+  number:
+    currency:
+      format:
+        unit:      "Tk "
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format:    "%u%n"
+  #END:currency

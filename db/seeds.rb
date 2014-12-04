@@ -11,7 +11,7 @@ Product.delete_all
 #....
 Product.create!(
   title: 'Toyota Headlight',
-  description: %{<p>Buy a Toyota Headlight from us!</p>},
+  description: %{Buy a Toyota Headlight from us!},
   image_url: 'ToyotaHeadlight.jpg',
   price: 3500.00
  )
