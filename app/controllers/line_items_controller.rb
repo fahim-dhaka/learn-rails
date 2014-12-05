@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :decrease, :increase]                                 #edited
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
   # GET /line_items
@@ -31,14 +31,15 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to store_url }
-        format.js { @current_item = @line_item }                 #PRAG148: flag the most recently updated item in cart 
-        format.json { render action: 'show',
-          status: :created, location: @line_item }
+        format.html { redirect_to store_url }                                                     
+        format.js { @current_item = @line_item }                                                   #PR148: flag the most recently updated item in cart 
+        format.json { render action: 'show',                                                       
+          status: :created, location: @line_item }                                                 
+        
       else
         format.html { render action: 'new' }
-        format.json { render json: @line_item.errors,
-          status: :unprocessable_entity }
+        format.json { render json: @line_item.errors,                                              
+          status: :unprocessable_entity }                                                          
       end
     end
   end
@@ -57,6 +58,48 @@ class LineItemsController < ApplicationController
     end
   end
 
+
+  #making increment and decrement.  PR: Pt-F-2-31 
+
+  # PUT /line_items/1
+  # PUT /line_items/1.json
+  def decrease
+#    @cart = current_cart
+    @line_item = @cart.decrease(params[:id])
+
+    respond_to do |format|
+      if @line_item.save
+        format.html { redirect_to store_path, notice: 'Line item was successfully updated.' }
+        format.js   { @current_item = @line_item }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+  # PUT /line_items/1
+  # PUT /line_items/1.json
+  def increase
+#   @cart = current_cart
+    @line_item = @cart.increase(params[:id])
+
+    respond_to do |format|
+      if @line_item.save
+        format.html { redirect_to store_path, notice: 'Line item was successfully updated.' }
+        format.js   { @current_item = @line_item }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  #ended increment and decrement
+
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
@@ -66,6 +109,10 @@ class LineItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

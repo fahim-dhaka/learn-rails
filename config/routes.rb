@@ -3,11 +3,23 @@ Depot::Application.routes.draw do
 
   resources :line_items
 
+  # making increment and decrement
+  resources :line_items do
+    put 'decrease', on: :member
+    put 'increase', on: :member
+  end
+
   resources :carts
 
   get 'store/index'
+  #PR175
+  resources :products do
+    get :who_bought, on: :member
+  end
 
   resources :products
+
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

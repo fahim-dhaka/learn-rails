@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   #PR161: 
   def new
-    if @cart.line_items.empty?                                                 #PR161: checking the cart
+    if @cart.line_items.empty?                                                                    #PR161: checking the cart
       redirect_to store_url, notice: "Your cart is empty"
       return
     end
@@ -37,11 +37,16 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.add_line_items_from_cart(@cart)                                                        #PR168
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
+        Cart.destroy(session[:cart_id])                                                           #PR168
+        session[:cart_id] = nil                                                                   #
+                                                                                                  #
+      #  format.html { redirect_to @order, notice: 'Order was successfully created.' }            #
+        format.html { redirect_to store_url, notice: 'Thank you for your order.' }                #
+        format.json { render :show, status: :created, location: @order }                          
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
