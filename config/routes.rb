@@ -1,4 +1,21 @@
 Depot::Application.routes.draw do
+#  get 'admin/index'                                     #PR200
+
+#  get 'sessions/new'                                    #PR200
+
+  get 'admin' => 'admin#index'                           #PR200
+  controller :sessions do                                #
+    get 'login' => :new                                  #
+    post 'login' => :create                              #
+    delete 'logout' => :destroy                          #
+  end
+
+#  get 'sessions/create'
+
+#  get 'sessions/distroy'
+
+  resources :users
+
   resources :orders
 
   resources :line_items
@@ -12,12 +29,11 @@ Depot::Application.routes.draw do
   resources :carts
 
   get 'store/index'
-  #PR175
-  resources :products do
+
+  resources :products do                                         #PR175
     get :who_bought, on: :member
   end
 
-  resources :products
 
   
 

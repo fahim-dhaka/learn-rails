@@ -1,5 +1,15 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::Base                          #PR202
+  before_action :authorize
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+    # ...
+
+  protected
+
+    def authorize
+      unless User.find_by(id: session[:user_id])
+        redirect_to login_url, notice: "Worng login, Please log in again"
+      end
+    end
 end

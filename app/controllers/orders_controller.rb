@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_action :authorize, only: [:new, :create]                                        #PR203
 
   #PR160: Making sure that there is something in the cart.
   include CurrentCart                                                         
